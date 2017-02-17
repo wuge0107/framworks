@@ -4,7 +4,7 @@
 
 使用比较简单
 
-1、直接下载此框架放到你的坏境目录下 地址 https://github.com/wuge0107/bframworks.git 使用git|svn 都可以下载
+1、直接下载此框架放到你的坏境目录下 地址 https://github.com/wuge0107/framworks.git 使用git|svn 都可以下载
 
 2、访问方式是 根目录下的index.php为入口
 
