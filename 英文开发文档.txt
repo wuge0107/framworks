@@ -1,0 +1,531 @@
+<----  start --->
+					Welcome to see the English document Thinks.......
+
+
+That this framework is a lightweight, open source framework Because the framework used the methods, such as namespace support PHP version will be available more than 5.4 above
+
+
+Installation steps
+
+1, direct download the framework on your bad directory
+
+2, access method is the root directory of the index. The PHP for entry
+
+3, url beautification concealed index. PHP but your apache open rewrite model Don't know can baidu is simpler Don't do too much introduction here
+
+4, your server address, for example, routing way youserver welcome to use the framework in which the default access is the controller of the success of the installation method of the index
+For example: youserver/index/index
+
+5, routing parameters
+
+	For example youserver/index/index/id/1/name/zhangsan
+	Access is the controller of the index method to carry the id=1 name=zhangsan of two parameters can be used to get() method takes the two parameter method details below will break down
+
+6, safety
+
+	In the index. PHP defines the debug after a constant change to be false Don't see any error message
+	Suggestions in the development stage to true project on-line deployment time to false;
+
+7, whether to open the log log Also can be in the index. PHP constant change a LOG into a false not open LOG true words will open to a LOG
+
+
+8, controllers,
+	Controller may store the app/controller directory controller is established Please refer to the Index the specification of the controller
+	Namespace namespace app\controller;
+	Inherit the core\start initialization class
+	Method named Interview with randomly as the index list update youservername/controller name/method/key/value 1
+
+9, models,
+	Model files in app\model contains namespace for app\model;
+	To inherit the core\lib\the model superclass model or use core\lib\model can then be directly inherited the model superclass model primarily to add and delete methods later explanation
+
+
+10, static resource
+	Temporarily do not specify a directory to store The user can in the app directory Establish a folder to store static resources Then the template file input constant APP stitching/users of the new directory/CSS/can find this directory
+
+
+11, view files
+	File directory under the app\views\concrete do not require Can also be a new directory controller when loading the template Please spell on the folder name/.../template name Suffix called PHP can add don't add such as test/index can also be written in PHP tset/index attention points(template suffix agree for PHP files) if the control when loading the template parameters for the template name Loading views directly below the template for instance('index') loading views directly below the index. The PHP template
+
+
+12, a custom function
+	Can write common/function. Can be used inside the PHP when please use the Loader() method name, parameter method parameters for the function name Such as loader('funcname, $arr) parameters 1 is the method name, 2 for the specific parameters can be for array|object|string
+
+
+13, the error template
+	Shut down after the debug exception loads views/error of some wrong template You can modify Also can not change
+
+
+14, configuration files,
+	Configuration files in the core/config files in the general configuration information Can be modified in it according to the actual situation
+	Routing configuration information such as database configuration information log log configuration information
+
+
+15, global function for details
+
+	Global function on the core directory/common directory Called the function. The PHP
+	Under the explanation and using of all functions
+
+	15-1, p() function is used to print out the string|array|bool parameter is only one That is value
+
+	15-2, the parameters of the post() function is used to receive post data has three
+		A, the first parameter is the key of the specific POST array such as POST('name') equals $_POST ['name'] returns the specific value
+
+		B, the second parameter default values If the calling post this function did not find the key will return the value of the second parameter That is the custom of default values Can not set the default return false
+
+		C, the third parameter validation rules string or int the default does not validate(note But it will also conduct relevant safety filter, etc Please rest assured) verification through will return when the second parameter
+		
+		Post function also can not pass any parameter returns an array All data is also a user submits a post(safety has also carried on the related filter For example, Special characters to escape Delete the HTML tags, or delete js code, etc...)
+
+
+	15-3, the get() and post function is similar to receive the get data also has three parameters
+		A, the first parameter is the $_GET parameters of key can be null Null is returned all the get parameters not false;
+		
+		B, the second parameter is the return to a default value for the custom Don't preach to false by default;
+		
+		C, the third is a validation rules int|string Numbers or strings The default is not to set the authentication validation by returning to the default value
+		
+		security If the value contains special characters will be returned to the default value Which is the second parameter get parameters are allowed to pass values only lowercase letters and Numbers
+
+
+	15-4, page jump redirect() there are three parameters
+		1, the first parameter is the address of a jump The default is false if you do not fill in return to previous page Fill out the jump to the corresponding address
+		
+		2, the second parameter is the waiting time The default is 3 seconds after the jump to the corresponding address three seconds
+
+		Tip 3, the third argument is display information(in the waiting time to see this message) but if set the second parameter is zero or is invisible to the false message Because it is the direct jump
+
+	15-5 msubstr() intercept Chinese characters There are four parameters 1 is required It is the first parameter to intercept the string
+
+		1, the first parameter is the string to intercept Can be into Chinese for the letters and Numbers
+		2, the second parameter is the beginning of the interception location The default is 0 meaning from the first began to intercept
+		3, the third parameter is the end of interception location Default is to intercept to the end
+		4, the fourth parameter is the type of character By default utf-8 also can be set to GBK|gb2312|big5
+		returns the After the completion of the intercept of a string
+
+	15-6, removeJsStr() deletes js code is only one parameter is to be deleted js code string
+		returns the string after deleting
+
+
+	15-7 FileUpload() upload attachments
+		@ param1 string $path upload path must be parameters
+		@ param2 array|string $file file resources Don't preach will automatically get into $_FILES parameters
+		@ param3 int $Max madly uploaded files unit maximum m 2 m by default
+		@ param4 string $fileName file name Can set the name after the success of the upload attachments Don't have the default Settings
+		@ param5 array $type can upload type has a default Settings Also you can set the
+		@ return a bool|string failure or success
+
+
+	15-8 xmlToArray() XML data into a regular array
+		Parameter 1 is an XML data
+
+
+	15-9 loader() calls a custom function
+		Parameter 1 is a function name string
+
+		Parameters is 2 calls to this function is not pass the parameters such as: loader('xmlToArray') will call xmlToArray() this function
+     
+	15-10 dump() 
+		print output for array|string|int|object|bool|null you just need to a parameter..
+
+16, controllers,
+		The new controller If you only do simple output Don't have to inherit the parent class controller
+		If you want to load the template are used We need to inherit the parent class Inheritance is also relatively simple \core\lib\controller can use the parent class controller For example the class Index extends \core\lib\controlelr
+		Also can use keywords to use the introduction of the use core\lib\ controller;And then directly inherited the controller For example, the class Index extends controlelr
+		Pay attention to the point of controller is established To use the hump method is used to capitalize the first letter('Index') and want the same as the file name
+
+		Parent controller controller is only one method is to view template file to load And there are two parameters can be passed parameters
+
+			1, is a template file name(suffix can take can not take) but must be based on template file. PHP suffix
+			2, specific parameters must be passed in the form of an array
+			For example, $arr=['id'=>1); 
+			$database->view('index',['arr'=>$arr]);
+
+		At the time of the template output needs to pay attention to the sample If you have an array $arr=['id'=>1);When the output Can be directly output $arr ['key'] echo $arr ['id'].This value can be 1
+
+17, models,
+	Method of model file naming conventions when please use the hump class name is the same as the file name Such as file named Stu. PHP class name must be the Stu
+	Namespace according to their own situation The default app\model;If there is demand to operate database Please inherits the core\lib\model parent class or use the core\lib\model;Then can inherit the database configuration file directly in core/config/databases. PHP modifications on its own
+
+
+	Attention: because the model of the parent class method is support by the PDO must open the PDO extension
+
+	Method,
+	Select($table, $join, $columns, $where) query
+		The name of the table.
+		The table [string]
+		Multi-table queries, do not use can be ignored.
+		The join(array)
+
+		The field name to query.
+		Columns string/array you can use * to match all of the fields, but if you name field name can improve performance very well. You can use a nickname, in order to prevent the field conflict Such as
+		$data=$database->select("account",
+		"User_id",
+		"The nickname(my_nickname)"//brackets represent the field alias
+		], [
+		"LIMIT"=>20
+		]); 
+
+	The where(optional)(array)
+	Query conditions.
+
+
+	Insert insert($table, $data)
+	$table table name
+	$data array to insert table fields and more than the value of the data you can use the three dimensional array
+	return the primary key Id
+
+	The update($table, $data, $where) changes
+	The table [string]
+	The name of the table.
+	Data(array)
+	Modify the data.
+	The where(optional)(array)
+	The WHERE condition conditions must exist Or you will modify the data of the table
+
+	return to return the affected rows
+ 
+	Delete($table, $where) to delete the data in the table is a more dangerous operation, before operation, please consider good...
+
+
+	$database->delete($database->table, ['id'=>$id]);
+		$database->delete("table",
+			"AND"=>[
+			"Type"=>"business"
+			"Age"[the]=>18
+			]
+		]);
+	return: [int] returns the deleted rows.
+
+	$database->select("account","user_name",
+		"Email"=>"foo@bar.com"
+		]);
+	//the WHERE email='foo@bar.com'
+	 
+	$database->select("account","user_name",
+		"User_id"=>200
+		]);
+	//the WHERE user_id=200
+	 
+	$database->select("account","user_name",
+		"User_id/>"=>200
+		]);
+	//the WHERE user_id>200
+	 
+	$database->select("account","user_name",
+		"User_id [>=]"=>200
+	]);
+	//the WHERE user_id>=200
+	 
+	$database->select("account","user_name",
+		"User_id [!]"=>200
+	]);
+	//the WHERE user_id!=200
+	 
+	$database->select("account","user_name",
+		"The age(<>)"=>[200, 200]
+	]);
+	//WHERE the age BETWEEN 200 AND 200
+	 
+	$database->select("account","user_name",
+		"Age(><)"=>[200, 200]
+	]);
+	//WHERE the age NOT BETWEEN 200 AND 200
+
+
+	//not only can you use string and number, you can also use the array
+	$database->select("account","user_name",
+		"OR"=>[
+			"User_id"=>[2, 123, 234, 54].
+			"Email"=>["foo@bar.com","cat@dog.com","admin@medoo.in"]
+		]
+	]);
+	//the WHERE
+	//user_id(2123234, 2123234) IN the OR
+	//email IN('foo@bar.com','cat@dog.com','admin@medoo.in')
+
+	//query conditions
+	$database->select("account","user_name",
+		"AND"=>[
+			"User_name [!]"=>"foo",
+			"User_id [!]"=>1024,
+			"Email [!]"=>["foo@bar.com","cat@dog.com","admin@medoo.in"].
+			"City [!]"=>null,
+			"Promoted [!]"=>true
+		]
+	]);
+
+
+	//condition search
+	//you can use"AND"OR"OR"to joining together very complex SQL statements
+	//basic use
+	$database->select("account","user_name",
+		"AND"=>[
+			"User_id/>=>200",
+			"The age(<>)"=>[18, 25],
+			"Gender"=>"female"
+		]
+	]);
+	//the WHERE user_id>200 AND the age BETWEEN 18 AND 25 AND gender='female'
+
+	$database->select("account","user_name",
+		"OR"=>[
+			"User_id/>=>200",
+			"The age(<>)"=>[18, 25],
+			"Gender"=>"female"
+		]
+	]);
+	//the WHERE user_id>200 OR the age BETWEEN 18 AND 25 OR gender='female'
+	 
+	//composite condition
+	$database->has("account",
+		"AND"=>[
+			"OR"=>[
+			"User_name"=>"foo",
+			"Email"=>"foo@bar.com"
+			]
+		"Password"=>"12345"
+		]
+	]);
+	//the WHERE(user_name='foo'OR email='foo@bar.com') AND password='12345'
+
+
+	//Like fuzzy matching
+	//LIKE use the syntax [~]
+	//by default, before and after using % in contains keywords
+	$database->select("person","id",
+		"City [~]"=>"lon"
+	]);
+	 
+	WHERE"city"LIKE'% lon %'
+	 
+	//array form, the query multiple keywords
+	$database->select("person","id",
+		"City [~]"=>["lon","foo","bar"]
+	]);
+	 
+	WHERE"city"LIKE'% lon %'OR"city"LIKE'% foo %'OR"city"LIKE'% % bar'
+	 
+	//do not contain [! ~]
+	$database->select("person","id",
+		"City [!~]"=>"lon"
+	]);
+	 
+	WHERE the"city"NOT LIKE'% lon %'
+
+	The sorting
+	$database->select("account","user_id", [
+	"ORDER"=>"user_id",
+		"ORDER"=>[
+		"User_id"=>[12, 43, 57, 98, 144, 1].
+		"Register_date."
+		"Profile_id"=>"DESC",
+		"Date"=>"ASC"
+		]
+	]);
+
+
+	Using SQL function
+	In some special cases, you may need to use SQL system function, you just need to before the field name and # #
+	$data=$database->select('account',
+		'user_id',
+		'user_name'
+		], [
+		'#datetime'=>'NOW()'
+	]);
+
+
+	Other parameters
+	$database->select("account","user_id", [
+		"GROUP"=>"type",
+		"HAVING"=>[
+			"User_id[/>"=>500
+			],
+		"LIMIT"=>[20, 100]
+	]);
+	//SELECT user_id FROM the account
+	//GROUP BY type
+	//HAVING user_id>500
+	//LIMIT 20100
+
+
+
+
+	Get($table, $columns, $where) returns a row from the table
+	$email=$database->get("account","email",
+		"User_id"=>1234
+	]);
+	return: return to query string/array data.
+
+
+	From the() to determine whether there is data from the($table, $where)
+	$database->has("account",
+		"AND"=>[
+			"OR"=>[
+			"User_name"=>"foo",
+			"Email"=>"foo"
+			],
+		[
+			"Password"=>"12345"
+		]
+	])
+	return: Boolean returns TRUE or FALSE.
+
+
+	The count($table, $where) to get the data in the table rows
+		The table [string]
+		The name of the table.
+		The where(optional)(array)
+		The WHERE condition.
+		$database->count($database->table).
+		return: [number] the number of rows.
+
+
+	Max($table, $column, $where) to obtain the data table, the value is the biggest of all
+		The table [string]
+		The name of the table.
+		The column(string)
+		Query field columns.
+		The where(optional)(array)
+		The WHERE condition.
+		$database->Max($database->table,'id');
+		return: [number] returns the largest value.
+
+
+	Min($table, $column, $where) to obtain the lowest value in a column
+		The table [string]
+		The name of the table.
+		The column(string)
+		The columns of the need to query.
+		The where(optional)(array)
+		The WHERE condition.
+		$database->min($database->table,'id');
+		return: [number] returns the smallest value.
+
+
+	Avg($table, $column, $where) to obtain mean value of a column
+		The table [string]
+		The name of the table.
+		The column(string)
+		column
+		The where(optional)(array)
+		The WHERE condition.
+		$database->avg($database->table,'id');
+		The average return: [number]
+
+
+	The sum($table, $column, $) where a column fields together
+		The table [string]
+		The name of the table.
+		The column(string)
+		The columns of the query.
+		The where(optional)(array)
+		The WHERE condition.
+
+
+	$database->sum($database->table,'id');
+		return: [number] added value.
+
+	The replace($table, $columns, $where) the new data to replace the old data
+		$database->replace("account","type", [
+			"User"=>"new_user",
+			"Business"=>"new_business"
+			], [
+			"User_id"[>"=>1000
+		]);
+	//return: return to the affected rows(int)
+
+
+	The query($query) executing SQL statements
+		Query [string]
+		return: [object] The PDOStatement object.
+		This method is used to use complex SQL statements, SQL injection problems please refer to the quote
+
+
+	$database->query("CREATE TABLE TABLE(
+		C1 INT STORAGE DISK,
+		C2 INT STORAGE MEMORY
+		) ENGINE NDB;");
+	 
+	$data=$database->query("SELECT email FROM the account")->fetchAll();
+	Print_r($data);
+
+
+	Quote $string string escape
+		$string [string]
+		A string.
+		return: [string]
+
+
+	$data="Medoo";
+	Echo"We love". $data;//We love Medoo
+	Echo"We love". $database->quote($data);//We love'Medoo'
+
+
+	The PDO
+	$database->->the pdo beginTransaction();//open transaction
+		$database->insert("account",
+			"User_name"=>"foo",
+			"Email"=>"foo@bar.com",
+			"Age"=>25
+		]);
+	$database->the pdo->commit();//submit
+	$database->the pdo->the rollBack();//rollback
+
+
+	The Debug
+	Enter the SQL statement, but does not perform
+
+	Output of SQL statements, do not need to use echo or other methods.Debugging finished, please move this code
+	$database->debug()->select("bccount,"[
+		"User_name",
+		"Email"
+		], [
+		"User_id"[the]=>20 
+	]);
+
+
+	For the last error.
+	Error()
+	return: [array] array of return an error code
+	$database->select("bccount,"[
+		"User_name",
+		"Email"
+		], [
+		"User_id"[the]=>20
+	]);
+	 
+	Var_dump($database->error());
+	//array(3) {[0]=>string(5)"42 s02"[1]=>int(1146) [2]=>string(36)"Table'my_database. Bccount'doesn't exist"}/if you define a Table name does not exist Will say table does not exist
+
+	The log() returns all executed queries.Can use this function to query, debugging SQL statements
+		$database->insert("account",
+			"User_name"=>"foo",
+			"Email"=>"foo@bar.com"
+		]);
+	Var_dump($database->log());
+	//array(1) {
+	//[1]=>string(74)"INSERT INTO"account"("user_name","email") VALUES('foo','foo@bar.com')"
+	//}
+
+
+	Last_query() returns the last execution of SQL statements. return: [string]
+		And the log() is very similar, but only returns the last execution of SQL statements
+
+	Info() to check the database information
+		return:(string) returns the database information
+		Print_r($database->info());
+		Array(
+		[server]=>Uptime: 5074 Threads: 1 Questions: 15 missile queries: 0 Opens: 67 Flush tables: 1
+		The Open tables: 60 Queries per second avg: 0.002
+		[client]=>mysqlnd 5.0.10-20111026- $Id: e707c415db32080b3752b232487a435ee0372157 $
+		[the driver]=>mysql
+		[version]=>5.6.10
+		[connection]=>localhost via TCP/IP );
+
+
+
+		Conclusion.
+			First of all, congratulations you finished watching the development documentation oh, deficiencies please point out, please contact QQ 82443074 Welcome to harass..
+
+		——__—— (:   No oh
