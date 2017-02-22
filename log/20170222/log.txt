@@ -1,0 +1,6 @@
+2017-02-22 11:25:43" this controller is:\\app\\controllers\\index  this action is:index"
+2017-02-22 11:25:43" \\app\\controllers\\favicon.ico is undefined"
+2017-02-22 11:25:45" this controller is:\\app\\controllers\\index  this action is:index"
+2017-02-22 11:25:45" \\app\\controllers\\favicon.ico is undefined"
+2017-02-22 11:26:10" this controller is:\\app\\controllers\\index  this action is:index"
+2017-02-22 11:26:10" \\app\\controllers\\favicon.ico is undefined"

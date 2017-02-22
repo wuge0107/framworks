@@ -22,11 +22,11 @@ class conf
     static public function get($name,$key=null)
     {
         if(!isset(self::$conf[$name])){
-            $path = CONFIG .'/'.$name.'.php';
+            $path = CONFIG_PATH .'/'.$name.'.php';
             if(!is_file($path)){
                 return false;
             }
-            self::$conf[$name] = include $path;
+            self::$conf[$name] = require $path;
         }
         $config = self::$conf[$name];
         if(is_null($key)){

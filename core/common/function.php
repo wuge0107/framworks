@@ -15,7 +15,7 @@
     }
 
     /**
-     * @param1 $name 对应的值
+     * @param1 $name 对应的键
      * @param2 $default 默认值
      * @param3 $fitt 过滤方法 int string
      * return string|$default
@@ -66,7 +66,7 @@
      */
     function get($name='',$default=false,$fitt=false)
     {
-        if($name==''){
+        if($name===''){
             $arr = [];
             foreach($_GET as $key => $a){
                 $arr[$key] =  htmlspecialchars($a);
@@ -110,7 +110,7 @@
      * @param2 int $time 等待的时间 s 如果为false直接跳转 不等待
      * @param3 string $message 显示的提示信息
      */
-    function redirect($url=false,$time=3,$message='系统发生错误..')
+    function redirect( $url=false, $time=3, $message='系统发生错误..')
     {
         //如果地址为空则返回上一页
         if(!$url){
@@ -121,7 +121,7 @@
             header('Location:'.$url); exit();
         }
         //加载跳转视图文件
-        include_once(VIEWS.'/redirect/'.'redirect.html');exit;
+        include_once(VIEWS_PATH.'/redirect/'.'redirect.html');exit;
     }
 
     /**
@@ -178,7 +178,8 @@
             $file = array_keys($_FILES);
             $file = $_FILES[$file[0]];
         }
-        if($max*1048576 < $file['size']){
+        $maxlength = $max*1048576;
+        if($maxlength < $file['size']){
             return '上传的附件太大了';
         }
         //文件名
@@ -235,21 +236,21 @@
     function loader($fun,$arr=false)
     {
         if(is_string($fun)){
-            $file =  APP.'common/function.php';
+            $file =  APP_PATH.'common/function.php';
             if(is_file($file)){
                 require_once ($file);
             }else{
-                if(DEBUG){
-                    return APP.'common/function.php'.'这个文件不存在..';
+                if(APP_DEBUG){
+                    return APP_PATH.'common/function.php'.'这个文件不存在..';
                 }else{
-                    include_once(VIEWS.'/error/'.'503.html');exit;
+                    include_once(VIEWS_PATH.'/error/'.'503.html');exit;
                 }
             }
             if(function_exists($fun)){
-                if($arr){
+                if($arr!=''){
                     return $fun($arr);
                 }else{
-                    return $fun();
+                    return $fun('');
                 }
             }else{
                 return '这个函数不存在...';

@@ -1,6 +1,6 @@
 <?php
 //数据库配置文件
-return [
+return array(
     'database_type' => 'mysql',        //数据库
     'database_name' => 'demo',       //库名
     'server' => 'localhost',               //服务器名或 ip地址
@@ -9,6 +9,6 @@ return [
     'charset' => 'utf8',        //字符集
     'port' => '3306',             //端口号
     'prefix' => ''             //表前缀
-];
+);
 
 

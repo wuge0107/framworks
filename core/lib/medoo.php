@@ -18,7 +18,7 @@ use PDO;
  * Class MyModel
  * @package core\lib
  */
-class MyModel
+class medoo
 {
 	// General
 	protected $database_type;

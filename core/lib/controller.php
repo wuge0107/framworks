@@ -8,7 +8,7 @@
          * @param array $data
          * @throws \Exception
          */
-        protected function view($file,array $data=[])
+        protected function view($file,array $data=array())
         {
             $str = explode('.',$file);
             if(count($str) > 1){
@@ -17,17 +17,17 @@
                     $file .= $v.'.';
                 }
             }
-            $file = VIEWS.'/'.rtrim($file,'.').'.php';
+            $file = VIEWS_PATH.'/'.rtrim($file,'.').'.php';
             if(is_file($file)){
                 if(is_array($data)){
                     extract($data);
                 }
-                include_once ($file);
+                include $file;
             }else{
-                if( DEBUG ){
+                if( APP_DEBUG ){
                     throw new \Exception('找不到这个文件'.$file);
                 }else{
-                    include VIEWS.'/error/error.html';
+                    include VIEWS_PATH.'/error/error.html';
                 }
             }
         }

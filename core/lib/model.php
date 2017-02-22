@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Class model
  * @package core\lib
  */
-class model extends MyModel
+class model extends medoo
 {
     /**
      * model constructor.

@@ -1,5 +1,6 @@
 <?php
-namespace app\controller;
+
+namespace app\controllers;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -14,6 +15,6 @@ class Index extends controller
     //添加数据展示页面
     public function index()
     {
-        $this->view('index');
+        dump(get());
     }
 }

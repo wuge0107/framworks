@@ -23,7 +23,7 @@ class log
     {
         //确定存储方式
         $drive = conf::get('log','DRIVE');
-        $class = DRIVECONTROLLER.$drive;
+        $class = DRIVECONTROLLER_PATH.$drive;
         self::$class = new $class;
     }
 
@@ -33,6 +33,6 @@ class log
      */
     static public function log($name,$file='log')
     {
-        self::$class->log($name,$file);
+        self::$class->writeLog($name,$file);
     }
 }
