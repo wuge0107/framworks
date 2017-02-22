@@ -31,7 +31,7 @@
 <body>
 <div class="container">
     <div class="content">
-        <div class="title">welcome</div>
+        <div class="title">welcome <?php echo $name;?> </div>
     </div>
 </div>
 </body>

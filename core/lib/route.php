@@ -22,7 +22,7 @@ class route
             //得到用户自定义的文件夹名
             $str = implode('',array_slice(explode('/', $_SERVER['SCRIPT_FILENAME']),-2,1));
             //url参数转换成数组
-            $patharr = explode('/',trim($_SERVER['REQUEST_URI'],'/'));
+            $patharr = explode('/',ltrim($_SERVER['REQUEST_URI'],'/'));
             //如果用户自定义的文件夹存在 则认为没有配置虚拟环境
             if($str == $patharr[0]){
                 //删除这个元素

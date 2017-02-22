@@ -20,7 +20,7 @@ class Student extends model
         return $this->insert($this->table,$data);
 
     }
-
+    //id求和
     public function conutA()
     {
         return $this->sum($this->table,'id');

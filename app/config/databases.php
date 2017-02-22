@@ -8,7 +8,7 @@ return array(
     'password' => '',           //密码
     'charset' => 'utf8',        //字符集
     'port' => '3306',             //端口号
-    'prefix' => ''             //表前缀
+    'prefix' => '',           //表前缀
 );
 
 

@@ -172,7 +172,7 @@
      * @param5 array $type      可以上传的类型
      * @return bool|string      失败或者成功的路径
      */
-    function FileUpload($path,$max=2,$file='',$fileName='',$type=[])
+    function fileUpload($path,$max=2,$file='',$fileName='',$type=[])
     {
         if(!is_array($file)){
             $file = array_keys($_FILES);
@@ -258,6 +258,12 @@
         }else{
             return '参数有误...';
         }
+    }
+
+    function env($name='')
+    {
+        $arr = include APP_PATH.'/config/app.php';
+        return isset($arr[$name]) ? $arr[$name] : false;
     }
 
 

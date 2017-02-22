@@ -54,14 +54,13 @@ class Start
             if(method_exists($ctrl,$action)){
                 $ctrl->$action();
             }elseif( APP_DEBUG ){
-                include VIEWS_PATH.'/error/error.html';
-            }else{
                 $arr = explode('\\',$ctrlClass);
                 if( APP_LOG ){
-                    echo 1; die;
                     log::log('  '.end($arr).' Methods '.$action.' in the controller is undefined ');
                 }
                 throw new \Exception('在这个'.end($arr).'控制器中找不到这个'.$action.'方法');
+            }else{
+                include VIEWS_PATH.'/error/error.html';
             }
             if( APP_LOG ){
                 log::log(' this controller is:'.$ctrlClass.' '.' this action is:'.$action);
