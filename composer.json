@@ -1,0 +1,23 @@
+{
+  "name":"BLOG_PHP",
+  "description":"PHP Framework",
+  "type":"Framework",
+  "keywords":[
+    "php","PHP Framework"
+  ],
+  "require":{
+    "php" : ">= 5.3.0",
+    "filp/whoops":"*",
+    "duncan3dc/blade": "^3.2",
+    "symfony/var-dumper":"*"
+  },
+  "repositories" : [
+    {
+      "type" : "composer",
+      "url" : "https://packagist.phpcomposer.com"
+    },
+    {
+      "packagist":false
+    }
+  ]
+}
