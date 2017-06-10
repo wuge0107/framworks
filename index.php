@@ -8,4 +8,4 @@
 
 	$app = require(APP_ROOT_PATH.'/core/run.php');//::run();//初始化 
 
-	$app->run();
+	$app->run(); //框架初始化
