@@ -1,7 +1,7 @@
 <?php
     return [
         'APP_DEBUG'         => true,                                //是否开启debug
-        'APP_LOG'           => true,                                //是否开启日志
+        'APP_LOG'           => false,                                //是否开启日志
 
         'CONTROLLER_DEFAULT'=> 'Index',                             //默认控制器
         'ACTION_DEFAULT'    => 'index',                             //默认方法

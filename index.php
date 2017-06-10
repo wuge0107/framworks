@@ -6,4 +6,6 @@
 
 	define('APP_ROOT_PATH',dirname( __FILE__ ));//项目根目录
 
-	(include(APP_ROOT_PATH.'/core/run.php'))::run();//初始化 
+	$app = require(APP_ROOT_PATH.'/core/run.php');//::run();//初始化 
+
+	$app->run();
