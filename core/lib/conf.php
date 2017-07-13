@@ -21,15 +21,18 @@ class conf
      */
     static public function get($name,$key=null)
     {
-        if(!isset(self::$conf[$name])){
+        if(!isset(self::$conf[$name]))
+        {
             $path = CONFIG_PATH .'/'.$name.'.php';
-            if(!is_file($path)){
+            if(!is_file($path))
+            {
                 return false;
             }
             self::$conf[$name] = require $path;
         }
         $config = self::$conf[$name];
-        if(is_null($key)){
+        if(is_null($key))
+        {
             return $config;
         }
         return isset($config[$key]) ? $config[$key] : false;

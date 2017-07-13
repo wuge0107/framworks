@@ -14,6 +14,13 @@ class Index extends controller
 {
     public function index()
     {
+    	$arr = array(array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),array('name'=>'hznn','age'=>1),);
+    	dump($arr);die;
         $this->display('index');
+    }
+
+    public function test()
+    {
+    	var_dump($_GET);
     }
 }

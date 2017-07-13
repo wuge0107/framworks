@@ -20,7 +20,7 @@ class Start
     {
         //定义header头
         header("Content-Type:text/html;charset=utf-8");
-        IF( APP_LOG ){
+        if( APP_LOG ){
             //日志初始化
             log::init();
         }
@@ -43,41 +43,61 @@ class Start
         //类名
         $ctrlClass = NEWCONTROLLER_PATH.'\\'.$ctrlClass;
         //文件是否存在
-        if(is_file($ctrlfile)){
+        if(is_file($ctrlfile))
+        {
             include $ctrlfile;
             //判断类是否存在
-            if(class_exists($ctrlClass)) {
+            if(class_exists($ctrlClass)) 
+            {
                 $ctrl = new $ctrlClass();
-            }else{
-                if(APP_DEBUG){
+            }
+            else{
+
+                if(APP_DEBUG)
+                {
                     throw new \Exception($ctrlClass.'类不存在..');
-                }else{
+                }
+                else
+                {
                     include VIEWS_PATH.'/error/error.html';
                 }
             }
             //类中的方法是否存在
-            if(method_exists($ctrl,$action)){
+            if(method_exists($ctrl,$action))
+            {
                 $ctrl->$action();
-            }elseif( APP_DEBUG ){
+            }
+            elseif( APP_DEBUG )
+            {
                 $arr = explode('\\',$ctrlClass);
-                if( APP_LOG ){
+                if( APP_LOG )
+                {
                     log::log('  '.end($arr).' Methods '.$action.' in the controller is undefined ');
                 }
                 throw new \Exception('在这个'.end($arr).'控制器中找不到这个'.$action.'方法');
-            }else{
+            }
+            else
+            {
                 include VIEWS_PATH.'/error/error.html';
             }
-            if( APP_LOG ){
+            if( APP_LOG )
+            {
                 log::log(' this controller is:'.$ctrlClass.' '.' this action is:'.$action);
             }
-        }else{
-            if( APP_DEBUG ){
+        }
+        else
+        {
+            if( APP_DEBUG )
+            {
                 $ctrlName = explode('\\',$ctrlClass);
-                if( APP_LOG ){
+                if( APP_LOG )
+                {
                     log::log(' '.$ctrlClass.' is undefined');
                 }
                 throw new \Exception('找不到控制器'.end($ctrlName));
-            }else{
+            }
+            else
+            {
                 include VIEWS_PATH.'/error/error.html';
             }
         }
@@ -90,15 +110,21 @@ class Start
      */
     static public function load($class)
     {
-        if(isset($classMap[$class])){
+        if(isset($classMap[$class]))
+        {
             return true;
-        }else{
+        }
+        else
+        {
             $class = str_replace('\\','/',$class);
             $file = APP_ROOT_PATH.'/'.$class.'.php';
-            if(is_file($file)){
+            if(is_file($file))
+            {
                 include $file;
                 self::$classMap[$class]=$class;
-            }else{
+            }
+            else
+            {
                 return false;
             }
         }

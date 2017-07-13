@@ -1,13 +1,5 @@
 <?php
 
-    $str = implode('',array_slice(explode('/', $_SERVER['SCRIPT_FILENAME']),-2,1));
-    $patharr = explode('/',ltrim($_SERVER['REQUEST_URI'],'/'));
-    if($str == $patharr[0]){
-        define('__ROOT__','/'.$str.'/');
-    }else{
-        define('__ROOT__', 'http://'.$_SERVER['SERVER_NAME']);
-    }
-
     define('DS' , DIRECTORY_SEPARATOR ); //目录分隔符 为兼容liunx系统
     define('CORE_PATH', APP_ROOT_PATH.'/core'.DS); //核心目录
     define('APP_PATH', APP_ROOT_PATH.'/app'.DS); //项目
@@ -36,7 +28,7 @@
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
     $whoops->register();
    
-    //错误回显
+
     APP_DEBUG ? ini_set('display_error','On') : ini_set('display_error','Off');
 
     include CORE_PATH.'Start.php'; //引入初始化类

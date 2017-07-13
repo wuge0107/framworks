@@ -20,7 +20,8 @@ class file
          * 2.写入日志
          */
         $dateHour = date('Ymd');
-        if(!is_dir($this->path.$dateHour)){
+        if(!is_dir($this->path.$dateHour))
+        {
             mkdir($this->path.$dateHour, 0777, true);
         }
         return file_put_contents($this->path.$dateHour.'/'.$file.'.txt',date('Y-m-d H:i:s').json_encode($message).PHP_EOL,FILE_APPEND);
