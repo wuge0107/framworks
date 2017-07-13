@@ -22,38 +22,53 @@
      */
     function post($name='',$default=false,$fitt=false)
     {
-        if($name==''){
+        if($name=='')
+        {
             $arr=[];
-            foreach($_POST as $key=>$value){
+            foreach($_POST as $key=>$value)
+            {
                 $arr[$key] = htmlspecialchars(strip_tags(addcslashes($value,TRUE)));
             }
             return $arr;
         }
         $data = isset($_POST[$name]) ? $_POST[$name] : $default;
 
-        if(isset($data)){
-            if($fitt){
-                switch($fitt){
+        if(isset($data))
+        {
+            if($fitt)
+            {
+                switch($fitt)
+                {
                     case 'int':
-                        if(is_numeric($data)){
-                            return preg_replace("'<script(.*?)<\/script>'is","",$data);
-                        }else{
-                            return $default;
-                        }
+                    if(is_numeric($data))
+                    {
+                        return preg_replace("'<script(.*?)<\/script>'is","",$data);
+                    }
+                    else
+                    {
+                        return $default;
+                    }
                     break;
                     case 'string':
-                        if(is_string($data)){
-                            return preg_replace("'<script(.*?)<\/script>'is","",$data);
-                        }else{
-                            return $default;
-                        }
+                    if(is_string($data))
+                    {
+                        return preg_replace("'<script(.*?)<\/script>'is","",$data);
+                    }
+                    else
+                    {
+                        return $default;
+                    }
                     break;
                     default:;
                 }
-            }else{
+            }
+            else
+            {
                 return preg_replace("'<script(.*?)<\/script>'is","",$data);
             }
-        }else{
+        }
+        else
+        {
             return $default;
         }
     }
@@ -79,27 +94,39 @@
             return $default;
         }
         if(isset($data)){
-            if($fitt){
-                switch($fitt){
+            if($fitt)
+            {
+                switch($fitt)
+                {
                     case 'int':
-                        if(is_numeric($data)){
-                            return htmlspecialchars(addcslashes($data,true));
-                        }else{
-                            return $default;
-                        }
-                        break;
+                    if(is_numeric($data))
+                    {
+                        return htmlspecialchars(addcslashes($data,true));
+                    }
+                    else
+                    {
+                        return $default;
+                    }
+                    break;
                     case 'string':
-                        if(is_string($name)){
-                            return htmlspecialchars(addcslashes($data,true));
-                        }else{
-                            return $default;
-                        }
+                    if(is_string($name))
+                    {
+                        return htmlspecialchars(addcslashes($data,true));
+                    }
+                    else
+                    {
+                        return $default;
+                    }
                     default:;
                 }
-            }else{
+            }
+            else
+            {
                 return htmlspecialchars(addcslashes($data,false));
             }
-        }else{
+        }
+        else
+        {
             return $default;
         }
     }
@@ -134,13 +161,18 @@
      */
     function msubstr($str, $start=0, $length=false, $charset="utf-8")
     {
-        if(!$length){
+        if(!$length)
+        {
             $length = mb_strlen($str,$charset);
         }
-        if(mb_strlen($str,$charset) >= $length) {
-            if(function_exists("mb_substr")){
+        if(mb_strlen($str,$charset) >= $length) 
+        {
+            if(function_exists("mb_substr"))
+            {
                 return mb_substr($str, $start, $length, $charset);
-            }elseif(function_exists('iconv_substr')) {
+            }
+            elseif(function_exists('iconv_substr')) 
+            {
                 return iconv_substr($str,$start,$length,$charset);
             }
             $re['utf-8'] = "/[x01-x7f]|[xc2-xdf][x80-xbf]|[xe0-xef][x80-xbf]{2}|[xf0-xff][x80-xbf]{3}/";
@@ -150,7 +182,9 @@
             preg_match_all($re[$charset], $str, $match);
             $slice = join("",array_slice($match[0], $start, $length));
             return $slice;
-        } else {
+        } 
+        else 
+        {
             return $str;
         }
     }
@@ -174,12 +208,14 @@
      */
     function fileUpload($path,$max=2,$file='',$fileName='',$type=[])
     {
-        if(!is_array($file)){
+        if(!is_array($file))
+        {
             $file = array_keys($_FILES);
             $file = $_FILES[$file[0]];
         }
         $maxlength = $max*1048576;
-        if($maxlength < $file['size']){
+        if($maxlength < $file['size'])
+        {
             return '上传的附件太大了';
         }
         //文件名
@@ -187,30 +223,39 @@
         //得到文件类型，并且都转化成小写
         $typeName = strtolower(substr($name,strrpos($name,'.')+1));
         //定义被允许文件后缀名
-        if(!$type){
+        if(!$type)
+        {
             $type=['jpg','jpeg','png','gif'];
         }
-        if(!in_array($typeName, $type)){
+        if(!in_array($typeName, $type))
+        {
             //如果不被允许，则直接停止程序运行
             return false;
         }
         //重新定义文件名
-        if(!$fileName){
+        if(!$fileName)
+        {
             //如果用户没有定义文件名的格式 则使用默认的格式
             $file['name'] = time().substr(uniqid(),6).'.'.$typeName;
-        }else{
+        }
+        else
+        {
             //如果有则使用用户定义的文件名格式
             $file['name'] = $fileName.$typeName;
         }
         //判断用户自定义的文件夹是否存在 不存则创建
-        if(!file_exists($path)){
+        if(!file_exists($path))
+        {
             mkdir($path,0777);
         }
         //开始移动文件到相应的文件夹
-        if(move_uploaded_file($file['tmp_name'],$path.$file['name'])){
+        if(move_uploaded_file($file['tmp_name'],$path.$file['name']))
+        {
             //返回上传好的路径
             return $path.$file['name'];
-        }else{
+        }
+        else
+        {
             return false;
         }
     }
@@ -235,27 +280,42 @@
      */
     function loader($fun,$arr=false)
     {
-        if(is_string($fun)){
+        if(is_string($fun))
+        {
             $file =  APP_PATH.'common/function.php';
-            if(is_file($file)){
+            if(is_file($file))
+            {
                 require_once ($file);
-            }else{
-                if(APP_DEBUG){
+            }
+            else
+            {
+                if(APP_DEBUG)
+                {
                     return APP_PATH.'common/function.php'.'这个文件不存在..';
-                }else{
+                }
+                else
+                {
                     include_once(VIEWS_PATH.'/error/'.'503.html');exit;
                 }
             }
-            if(function_exists($fun)){
-                if($arr!=''){
+            if(function_exists($fun))
+            {
+                if($arr!='')
+                {
                     return $fun($arr);
-                }else{
+                }
+                else
+                {
                     return $fun('');
                 }
-            }else{
+            }
+            else
+            {
                 return '这个函数不存在...';
             }
-        }else{
+        }
+        else
+        {
             return '参数有误...';
         }
     }
@@ -266,11 +326,5 @@
         return isset($arr[$name]) ? $arr[$name] : false;
     }
 
-    function url($urlName=false)
-    {
-        if($urlName){
-            return __ROOT__. str_replace('.','/','/'.$urlName);
-        }
-    }
 
 

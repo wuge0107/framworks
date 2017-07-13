@@ -16,13 +16,9 @@
     define('NEWCONTROLLER_PATH',str_replace('/','\\','\\'.substr(env('CONTROLLER_PATH'),strlen(APP_ROOT_PATH.'\\'))));//控制器命名空间
 
     date_default_timezone_set(env('DEFAULT_TIMEZONE')); //设置时区
-    //样式存放目录
-    define('CSS_PATH', env('CSS_PATH')); 
-    define('JS_PATH' , env('JS_PATH')); 
-    define('IMG_PATH', env('IMG_PATH'));
-
+    
     include APP_ROOT_PATH."/vendor/autoload.php";
-  
+    
     //注册错误信息的处理
     $whoops = new \Whoops\Run;
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
