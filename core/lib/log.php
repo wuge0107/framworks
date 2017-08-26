@@ -2,7 +2,7 @@
 
 namespace core\lib;
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Class log
@@ -19,11 +19,11 @@ class log
      * 1、确定日志存储方式
      * 2、写日志
      */
-    static public function init()
+    public static function init()
     {
         //确定存储方式
-        $drive = conf::get('log','DRIVE');
-        $class = DRIVECONTROLLER_PATH.$drive;
+        $drive       = conf::get('log', 'DRIVE');
+        $class       = DRIVECONTROLLER_PATH . $drive;
         self::$class = new $class;
     }
 
@@ -31,8 +31,8 @@ class log
      * @param $name
      * @param string $file
      */
-    static public function log($name,$file='log')
+    public static function log($name, $file = 'log')
     {
-        self::$class->writeLog($name,$file);
+        self::$class->writeLog($name, $file);
     }
 }

@@ -4,7 +4,7 @@ namespace core;
 use core\lib\log;
 use core\lib\route;
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Start
 {
@@ -20,7 +20,7 @@ class Start
     {
         //定义header头
         header("Content-Type:text/html;charset=utf-8");
-        if( APP_LOG ){
+        if (APP_LOG) {
             //日志初始化
             log::init();
         }
@@ -30,75 +30,56 @@ class Start
      * 框架启动类
      * @throws \Exception
      */
-    static public function run()
+    public static function run()
     {
-        $route = new route();
+        $route     = new route();
         $ctrlClass = $route->ctrl;
-        $action = $route->action;
+        $action    = $route->action;
 
-        define('CONTROLLER_NAME',$ctrlClass);
-        define('ACTION_NAME',$ctrlClass);
+        define('CONTROLLER_NAME', $ctrlClass);
+        define('ACTION_NAME', $ctrlClass);
         //文件
-        $ctrlfile  = CONTROLLER_PATH.'/'.ucfirst($ctrlClass).'.php';
+        $ctrlfile = CONTROLLER_PATH . '/' . ucfirst($ctrlClass) . '.php';
         //类名
-        $ctrlClass = NEWCONTROLLER_PATH.'\\'.$ctrlClass;
+        $ctrlClass = NEWCONTROLLER_PATH . '\\' . $ctrlClass;
         //文件是否存在
-        if(is_file($ctrlfile))
-        {
+        if (is_file($ctrlfile)) {
             include $ctrlfile;
             //判断类是否存在
-            if(class_exists($ctrlClass)) 
-            {
+            if (class_exists($ctrlClass)) {
                 $ctrl = new $ctrlClass();
-            }
-            else{
+            } else {
 
-                if(APP_DEBUG)
-                {
-                    throw new \Exception($ctrlClass.'类不存在..');
-                }
-                else
-                {
-                    include VIEWS_PATH.'/error/error.html';
+                if (APP_DEBUG) {
+                    throw new \Exception($ctrlClass . '类不存在..');
+                } else {
+                    include VIEWS_PATH . '/error/error.html';
                 }
             }
             //类中的方法是否存在
-            if(method_exists($ctrl,$action))
-            {
+            if (method_exists($ctrl, $action)) {
                 $ctrl->$action();
-            }
-            elseif( APP_DEBUG )
-            {
-                $arr = explode('\\',$ctrlClass);
-                if( APP_LOG )
-                {
-                    log::log('  '.end($arr).' Methods '.$action.' in the controller is undefined ');
+            } elseif (APP_DEBUG) {
+                $arr = explode('\\', $ctrlClass);
+                if (APP_LOG) {
+                    log::log('  ' . end($arr) . ' Methods ' . $action . ' in the controller is undefined ');
                 }
-                throw new \Exception('在这个'.end($arr).'控制器中找不到这个'.$action.'方法');
+                throw new \Exception('在这个' . end($arr) . '控制器中找不到这个' . $action . '方法');
+            } else {
+                include VIEWS_PATH . '/error/error.html';
             }
-            else
-            {
-                include VIEWS_PATH.'/error/error.html';
+            if (APP_LOG) {
+                log::log(' this controller is:' . $ctrlClass . ' ' . ' this action is:' . $action);
             }
-            if( APP_LOG )
-            {
-                log::log(' this controller is:'.$ctrlClass.' '.' this action is:'.$action);
-            }
-        }
-        else
-        {
-            if( APP_DEBUG )
-            {
-                $ctrlName = explode('\\',$ctrlClass);
-                if( APP_LOG )
-                {
-                    log::log(' '.$ctrlClass.' is undefined');
+        } else {
+            if (APP_DEBUG) {
+                $ctrlName = explode('\\', $ctrlClass);
+                if (APP_LOG) {
+                    log::log(' ' . $ctrlClass . ' is undefined');
                 }
-                throw new \Exception('找不到控制器'.end($ctrlName));
-            }
-            else
-            {
-                include VIEWS_PATH.'/error/error.html';
+                throw new \Exception('找不到控制器' . end($ctrlName));
+            } else {
+                include VIEWS_PATH . '/error/error.html';
             }
         }
     }
@@ -108,23 +89,17 @@ class Start
      * @param $class
      * @return bool
      */
-    static public function load($class)
+    public static function load($class)
     {
-        if(isset($classMap[$class]))
-        {
+        if (isset($classMap[$class])) {
             return true;
-        }
-        else
-        {
-            $class = str_replace('\\','/',$class);
-            $file = APP_ROOT_PATH.'/'.$class.'.php';
-            if(is_file($file))
-            {
+        } else {
+            $class = str_replace('\\', '/', $class);
+            $file  = APP_ROOT_PATH . '/' . $class . '.php';
+            if (is_file($file)) {
                 include $file;
-                self::$classMap[$class]=$class;
-            }
-            else
-            {
+                self::$classMap[$class] = $class;
+            } else {
                 return false;
             }
         }

@@ -1,4 +1,5 @@
 <?php
-    function xml($a){
-        return $a;
-    }
+function xml($a)
+{
+    return $a;
+}
